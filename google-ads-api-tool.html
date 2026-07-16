@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Ads API Internal Tool | Huy Hanh Marketing</title>
+  <meta name="description" content="Information about the internal Google Ads API reporting and campaign management tool operated by Huy Hanh Marketing." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://huyhanhmarketing.io.vn/google-ads-api-tool" />
+
+  <meta property="og:title" content="Google Ads API Internal Tool | Huy Hanh Marketing" />
+  <meta property="og:description" content="Internal Google Ads API reporting and campaign management tool information and privacy policy." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://huyhanhmarketing.io.vn/google-ads-api-tool" />
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #111827;
+      --muted: #5b6474;
+      --line: #e5e7eb;
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --success: #0f9d58;
+      --warning-bg: #fff8e1;
+      --warning-border: #f5c451;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(26, 115, 232, 0.10), transparent 34rem),
+        var(--bg);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), #6ea8fe);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(26, 115, 232, 0.24);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav a {
+      color: #374151;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      padding: 4px;
+      border-radius: 12px;
+      background: #eef2f7;
+      gap: 4px;
+    }
+
+    .lang-switch button {
+      border: 0;
+      background: transparent;
+      padding: 8px 12px;
+      border-radius: 9px;
+      font-weight: 800;
+      color: #667085;
+      cursor: pointer;
+    }
+
+    .lang-switch button.active {
+      color: var(--primary-dark);
+      background: #fff;
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .hero {
+      padding: 92px 0 58px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #e8f0fe;
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      max-width: 800px;
+      font-size: clamp(42px, 7vw, 74px);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 19px;
+      margin: 0 0 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 12px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(26, 115, 232, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: #fff;
+      color: #273142;
+    }
+
+    .btn-secondary:hover {
+      text-decoration: none;
+      border-color: #cbd5e1;
+      transform: translateY(-1px);
+    }
+
+    .status-card {
+      border-radius: var(--radius);
+      padding: 28px;
+      background: linear-gradient(150deg, #0f172a, #1e3a5f);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .status-card h2 {
+      margin: 0 0 18px;
+      font-size: 22px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .status-item:first-of-type {
+      border-top: 0;
+    }
+
+    .status-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.14);
+      flex: 0 0 auto;
+    }
+
+    section {
+      padding: 34px 0;
+      scroll-margin-top: 96px;
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      letter-spacing: -0.035em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.045);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: #e8f0fe;
+      color: var(--primary-dark);
+      font-weight: 900;
+    }
+
+    .content-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .content-row {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 30px;
+      padding: 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .content-row:first-child {
+      border-top: 0;
+    }
+
+    .content-row h3 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .content-row p,
+    .content-row ul {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .content-row ul {
+      padding-left: 20px;
+    }
+
+    .notice {
+      margin-top: 24px;
+      border: 1px solid var(--warning-border);
+      background: var(--warning-bg);
+      padding: 20px 22px;
+      border-radius: 16px;
+      color: #6b4c00;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      background: linear-gradient(135deg, #fff, #f7fbff);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 48px;
+      border-top: 1px solid var(--line);
+      padding: 30px 0 44px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    [data-lang="en"] {
+      display: none;
+    }
+
+    body.lang-en [data-lang="vi"] {
+      display: none;
+    }
+
+    body.lang-en [data-lang="en"] {
+      display: block;
+    }
+
+    body.lang-en span[data-lang="en"],
+    body.lang-en a[data-lang="en"] {
+      display: inline;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid,
+      .content-row,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .nav a:not(.keep-mobile) {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 64px;
+      }
+
+      .content-row {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 22px, 1120px);
+      }
+
+      .topbar-inner {
+        min-height: 64px;
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      h1 {
+        font-size: 45px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .status-card,
+      .card,
+      .content-row,
+      .contact-card {
+        padding: 22px;
+      }
+
+      .lang-switch button {
+        padding: 7px 9px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Huy Hanh Marketing",
+    "url": "https://huyhanhmarketing.io.vn/",
+    "email": "mailto:huyhanh.hum@gmail.com",
+    "description": "Digital marketing organization operating an internal Google Ads API reporting and campaign management tool."
+  }
+  </script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="https://huyhanhmarketing.io.vn/" aria-label="Huy Hanh Marketing">
+        <span class="brand-mark">HH</span>
+        <span>Huy Hanh Marketing</span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="https://huyhanhmarketing.io.vn/" data-lang="vi">Giới thiệu</a>
+        <a href="https://huyhanhmarketing.io.vn/" data-lang="en">About</a>
+        <a href="#privacy" data-lang="vi">Quyền riêng tư</a>
+        <a href="#privacy" data-lang="en">Privacy</a>
+        <a href="#contact" class="keep-mobile" data-lang="vi">Liên hệ</a>
+        <a href="#contact" class="keep-mobile" data-lang="en">Contact</a>
+
+        <div class="lang-switch" aria-label="Language selector">
+          <button type="button" id="btn-vi" class="active" onclick="setLanguage('vi')">VI</button>
+          <button type="button" id="btn-en" onclick="setLanguage('en')">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow" data-lang="vi">CÔNG CỤ GOOGLE ADS API NỘI BỘ</div>
+          <div class="eyebrow" data-lang="en">INTERNAL GOOGLE ADS API TOOL</div>
+
+          <h1 data-lang="vi">Báo cáo và vận hành quảng cáo có kiểm soát.</h1>
+          <h1 data-lang="en">Controlled advertising reporting and operations.</h1>
+
+          <p data-lang="vi">
+            Huy Hanh Marketing vận hành một công cụ nội bộ sử dụng Google Ads API để tổng hợp báo cáo,
+            phân tích hiệu suất và hỗ trợ quản lý các tài khoản quảng cáo được ủy quyền.
+          </p>
+          <p data-lang="en">
+            Huy Hanh Marketing operates an internal tool using the Google Ads API to generate reports,
+            analyze performance, and support the management of authorized advertising accounts.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#about" data-lang="vi">Xem thông tin công cụ</a>
+            <a class="btn btn-primary" href="#about" data-lang="en">View tool information</a>
+            <a class="btn btn-secondary" href="mailto:huyhanh.hum@gmail.com" data-lang="vi">Liên hệ qua email</a>
+            <a class="btn btn-secondary" href="mailto:huyhanh.hum@gmail.com" data-lang="en">Contact by email</a>
+          </div>
+        </div>
+
+        <aside class="status-card" aria-label="Tool status">
+          <h2 data-lang="vi">Nguyên tắc vận hành</h2>
+          <h2 data-lang="en">Operating principles</h2>
+
+          <div class="status-item">
+            <div class="status-icon">✓</div>
+            <div>
+              <strong data-lang="vi">Chỉ dùng nội bộ</strong>
+              <strong data-lang="en">Internal use only</strong>
+              <div data-lang="vi">Không cung cấp trực tiếp cho khách hàng hoặc bên thứ ba.</div>
+              <div data-lang="en">Not directly available to clients or third parties.</div>
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-icon">✓</div>
+            <div>
+              <strong data-lang="vi">Truy cập có kiểm soát</strong>
+              <strong data-lang="en">Controlled access</strong>
+              <div data-lang="vi">Chỉ nhân sự được phân quyền mới có thể sử dụng công cụ.</div>
+              <div data-lang="en">Only authorized personnel may use the tool.</div>
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-icon">✓</div>
+            <div>
+              <strong data-lang="vi">Có xác nhận của con người</strong>
+              <strong data-lang="en">Human approval</strong>
+              <div data-lang="vi">Các thay đổi quan trọng phải được người phụ trách phê duyệt.</div>
+              <div data-lang="en">Sensitive changes require approval by an authorized operator.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-lang="vi">Thông tin về đơn vị và công cụ</h2>
+          <h2 data-lang="en">Organization and tool information</h2>
+          <p data-lang="vi">
+            Trang này cung cấp thông tin công khai về mục đích và phạm vi sử dụng Google Ads API.
+          </p>
+          <p data-lang="en">
+            This page provides public information about the purpose and scope of our Google Ads API use.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="icon-box">01</div>
+            <h3 data-lang="vi">Tên đơn vị</h3>
+            <h3 data-lang="en">Organization</h3>
+            <p><strong>Huy Hanh Marketing</strong></p>
+          </article>
+
+          <article class="card">
+            <div class="icon-box">02</div>
+            <h3 data-lang="vi">Loại công cụ</h3>
+            <h3 data-lang="en">Tool type</h3>
+            <p data-lang="vi">Công cụ tự động hóa nội bộ cho báo cáo và vận hành Google Ads.</p>
+            <p data-lang="en">An internal automation tool for Google Ads reporting and operations.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon-box">03</div>
+            <h3 data-lang="vi">Người sử dụng</h3>
+            <h3 data-lang="en">Authorized users</h3>
+            <p data-lang="vi">Nhân sự nội bộ được phân quyền của Huy Hanh Marketing.</p>
+            <p data-lang="en">Authorized internal personnel of Huy Hanh Marketing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="purpose">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-lang="vi">Mục đích sử dụng Google Ads API</h2>
+          <h2 data-lang="en">Purpose of using the Google Ads API</h2>
+        </div>
+
+        <div class="content-panel">
+          <div class="content-row">
+            <h3 data-lang="vi">Báo cáo hiệu suất</h3>
+            <h3 data-lang="en">Performance reporting</h3>
+            <p data-lang="vi">
+              Công cụ truy xuất các chỉ số quảng cáo như lượt hiển thị, lượt nhấp, chi phí,
+              chuyển đổi, tỷ lệ nhấp, CPC, CPA và hiệu suất theo chiến dịch.
+            </p>
+            <p data-lang="en">
+              The tool retrieves advertising metrics such as impressions, clicks, cost,
+              conversions, click-through rate, CPC, CPA, and campaign-level performance.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Phân tích nội bộ</h3>
+            <h3 data-lang="en">Internal analysis</h3>
+            <p data-lang="vi">
+              Dữ liệu được dùng để tạo báo cáo nội bộ, phát hiện biến động bất thường
+              và hỗ trợ nhân sự đưa ra quyết định tối ưu quảng cáo.
+            </p>
+            <p data-lang="en">
+              Data is used to create internal reports, identify unusual performance changes,
+              and support authorized personnel in making optimization decisions.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Hỗ trợ quản lý chiến dịch</h3>
+            <h3 data-lang="en">Campaign management support</h3>
+            <p data-lang="vi">
+              Công cụ có thể hỗ trợ tạo bản nháp, kiểm tra cấu hình và thực hiện các thao tác quản lý
+              sau khi người phụ trách đã xem xét và phê duyệt.
+            </p>
+            <p data-lang="en">
+              The tool may assist with campaign drafts, configuration validation, and campaign management
+              actions after review and approval by an authorized operator.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Phạm vi tài khoản</h3>
+            <h3 data-lang="en">Account scope</h3>
+            <p data-lang="vi">
+              Công cụ chỉ được sử dụng đối với các tài khoản Google Ads mà Huy Hanh Marketing
+              sở hữu hoặc được chủ tài khoản ủy quyền quản lý hợp pháp.
+            </p>
+            <p data-lang="en">
+              The tool is used only for Google Ads accounts owned by Huy Hanh Marketing
+              or accounts that the organization is authorized to manage.
+            </p>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong data-lang="vi">Cam kết sử dụng nội bộ:</strong>
+          <strong data-lang="en">Internal-use commitment:</strong>
+          <span data-lang="vi">
+            Công cụ không được bán, cho thuê, cấp phép lại hoặc cung cấp công khai.
+            Khách hàng và bên thứ ba không có quyền truy cập trực tiếp vào Developer Token,
+            thông tin xác thực OAuth hoặc giao diện quản trị nội bộ.
+          </span>
+          <span data-lang="en">
+            The tool is not sold, rented, sublicensed, or made publicly available.
+            Clients and third parties do not have direct access to the Developer Token,
+            OAuth credentials, or internal administration interface.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-lang="vi">Chính sách quyền riêng tư</h2>
+          <h2 data-lang="en">Privacy policy</h2>
+          <p data-lang="vi">
+            Chính sách này áp dụng đối với dữ liệu được xử lý bởi công cụ Google Ads API nội bộ.
+          </p>
+          <p data-lang="en">
+            This policy applies to data processed by the internal Google Ads API tool.
+          </p>
+        </div>
+
+        <div class="content-panel">
+          <div class="content-row">
+            <h3 data-lang="vi">Dữ liệu được xử lý</h3>
+            <h3 data-lang="en">Data processed</h3>
+            <div>
+              <ul data-lang="vi">
+                <li>Thông tin tài khoản và chiến dịch Google Ads được cấp quyền truy cập.</li>
+                <li>Các chỉ số hiệu suất quảng cáo và dữ liệu cấu hình chiến dịch.</li>
+                <li>Thông tin nhật ký kỹ thuật cần thiết cho bảo mật và kiểm tra hoạt động.</li>
+              </ul>
+              <ul data-lang="en">
+                <li>Authorized Google Ads account and campaign information.</li>
+                <li>Advertising performance metrics and campaign configuration data.</li>
+                <li>Technical logs required for security and operational auditing.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Mục đích xử lý</h3>
+            <h3 data-lang="en">Processing purpose</h3>
+            <p data-lang="vi">
+              Dữ liệu chỉ được xử lý nhằm tạo báo cáo, phân tích hiệu suất, kiểm tra lỗi,
+              bảo mật hệ thống và thực hiện các thao tác quản lý quảng cáo được phê duyệt.
+            </p>
+            <p data-lang="en">
+              Data is processed only to generate reports, analyze performance, diagnose errors,
+              protect the system, and perform approved advertising management actions.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Không bán dữ liệu</h3>
+            <h3 data-lang="en">No sale of data</h3>
+            <p data-lang="vi">
+              Huy Hanh Marketing không bán dữ liệu Google Ads, dữ liệu tài khoản,
+              thông tin người dùng hoặc dữ liệu quảng cáo cho bất kỳ bên thứ ba nào.
+            </p>
+            <p data-lang="en">
+              Huy Hanh Marketing does not sell Google Ads data, account information,
+              user information, or advertising data to any third party.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Chia sẻ dữ liệu</h3>
+            <h3 data-lang="en">Data sharing</h3>
+            <p data-lang="vi">
+              Dữ liệu chỉ có thể được xử lý bởi các dịch vụ hạ tầng cần thiết để vận hành công cụ,
+              trong phạm vi phù hợp với chức năng kỹ thuật. Dữ liệu không được chia sẻ cho mục đích
+              quảng cáo lại, môi giới dữ liệu hoặc kinh doanh độc lập.
+            </p>
+            <p data-lang="en">
+              Data may be processed only by infrastructure services necessary to operate the tool,
+              and only within the scope required for technical functionality. Data is not shared for
+              data brokerage, independent commercial use, or unrelated advertising purposes.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Bảo mật</h3>
+            <h3 data-lang="en">Security</h3>
+            <p data-lang="vi">
+              Thông tin xác thực được lưu trong hệ thống quản lý thông tin bí mật hoặc credential
+              của n8n. Việc truyền dữ liệu sử dụng kết nối HTTPS và quyền truy cập được giới hạn
+              cho nhân sự được phép.
+            </p>
+            <p data-lang="en">
+              Authentication credentials are stored in n8n credentials or other protected secret
+              management mechanisms. Data is transmitted over HTTPS, and access is restricted
+              to authorized personnel.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Thời gian lưu trữ</h3>
+            <h3 data-lang="en">Data retention</h3>
+            <p data-lang="vi">
+              Dữ liệu và nhật ký chỉ được lưu trong thời gian cần thiết để phục vụ báo cáo,
+              bảo mật, kiểm tra hoạt động và tuân thủ nghĩa vụ hợp pháp. Dữ liệu không còn cần thiết
+              sẽ được xóa hoặc ẩn danh theo quy trình nội bộ.
+            </p>
+            <p data-lang="en">
+              Data and logs are retained only for as long as necessary for reporting, security,
+              operational auditing, and legal compliance. Data that is no longer required is deleted
+              or anonymized according to internal procedures.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Thu hồi quyền truy cập</h3>
+            <h3 data-lang="en">Access revocation</h3>
+            <p data-lang="vi">
+              Chủ tài khoản có thể thu hồi quyền truy cập của Huy Hanh Marketing trong phần quản lý
+              người dùng hoặc tài khoản quản lý của Google Ads. Yêu cầu liên quan đến dữ liệu có thể
+              được gửi tới email liên hệ trên trang này.
+            </p>
+            <p data-lang="en">
+              Account owners may revoke Huy Hanh Marketing's access through Google Ads user access
+              or manager account settings. Data-related requests may be sent to the contact email
+              listed on this page.
+            </p>
+          </div>
+
+          <div class="content-row">
+            <h3 data-lang="vi">Cập nhật chính sách</h3>
+            <h3 data-lang="en">Policy updates</h3>
+            <p data-lang="vi">
+              Chính sách này có thể được cập nhật khi phạm vi hoặc phương thức vận hành công cụ thay đổi.
+              Phiên bản mới nhất luôn được công bố tại URL này.
+            </p>
+            <p data-lang="en">
+              This policy may be updated when the scope or operation of the tool changes.
+              The latest version will always be published at this URL.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <h2 data-lang="vi">Thông tin liên hệ</h2>
+            <h2 data-lang="en">Contact information</h2>
+            <p>
+              <strong>Huy Hanh Marketing</strong><br />
+			  SĐT/Zalo:
+              <a href="https://zalo.me/0962623074">0962623074</a><br />
+			  Facebook:
+              <a href="https://fb.com/iamhuyhanh">Nguyễn Huy Hanh</a><br />
+              Email:
+              <a href="mailto:huyhanh.hum@gmail.com">huyhanh.hum@gmail.com</a><br />
+              Website:
+              <a href="https://huyhanhmarketing.io.vn/" target="_blank" rel="noopener">
+                https://huyhanhmarketing.io.vn/
+              </a>
+            </p>
+          </div>
+
+          <a class="btn btn-primary" href="mailto:huyhanh.hum@gmail.com" data-lang="vi">Gửi email</a>
+          <a class="btn btn-primary" href="mailto:huyhanh.hum@gmail.com" data-lang="en">Send email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>© <span id="year"></span> Huy Hanh Marketing.</div>
+      <div>
+        <span data-lang="vi">Cập nhật lần cuối: 10/07/2026</span>
+        <span data-lang="en">Last updated: July 10, 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function setLanguage(language) {
+      document.body.classList.toggle('lang-en', language === 'en');
+      document.documentElement.lang = language;
+
+      document.getElementById('btn-vi').classList.toggle('active', language === 'vi');
+      document.getElementById('btn-en').classList.toggle('active', language === 'en');
+
+      localStorage.setItem('preferred-language', language);
+    }
+
+    const storedLanguage = localStorage.getItem('preferred-language');
+    const browserLanguage = navigator.language || 'vi';
+
+    if (storedLanguage === 'en' || (!storedLanguage && browserLanguage.toLowerCase().startsWith('en'))) {
+      setLanguage('en');
+    } else {
+      setLanguage('vi');
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
