@@ -1,141 +1,56 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Viet Duc Dental Tourism – V1 Plus</title>
-<meta name="robots" content="noindex,nofollow">
-<style>
-html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#fff}
-#loading{min-height:100vh;display:grid;place-items:center;color:#0b3558;font-weight:800}
-</style>
-</head>
-<body>
-<div id="loading">Loading Viet Duc Dental preview…</div>
-<script>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Viet Duc Dental | Dental Tourism in Vietnam</title><meta name="robots" content="noindex,nofollow"><style>html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#fff}#loading{min-height:100vh;display:grid;place-items:center;color:#0b3558;font-weight:800}</style></head><body><div id="loading">Loading Viet Duc Dental preview…</div><script>
 (async()=>{
-  const res=await fetch('/en/dental-tourism-vietnam/?v='+Date.now(),{cache:'no-store'});
-  if(!res.ok) throw new Error('Unable to load V1 source');
-  const source=await res.text();
-  const doc=new DOMParser().parseFromString(source,'text/html');
+const res=await fetch('/en/dental-tourism-vietnam/?v='+Date.now(),{cache:'no-store'});
+if(!res.ok)throw new Error('Unable to load V1 source');
+const source=await res.text();
+const doc=new DOMParser().parseFromString(source,'text/html');
+doc.title='Viet Duc Dental | Dental Tourism in Vietnam';
 
-  doc.title='Viet Duc Dental | Dental Tourism in Vietnam';
-  let meta=doc.querySelector('meta[name="description"]');
-  if(!meta){meta=doc.createElement('meta');meta.name='description';doc.head.appendChild(meta)}
-  meta.content='Dental tourism in Vietnam with Viet Duc Dental: treatment planning, international patient support, modern technology, transparent pricing and travel coordination.';
+doc.querySelectorAll('header,footer,.floating,.float,.top,.topbar,.topnote').forEach(el=>el.remove());
 
-  doc.querySelectorAll('header, footer, .floating, .float').forEach(el=>el.remove());
-  [...doc.body.children].filter(el=>el.classList && (el.classList.contains('topbar')||el.classList.contains('topnote'))).forEach(el=>el.remove());
+const style=doc.createElement('style');
+style.textContent=`
+:root{--vb:#075f9c;--vb2:#1684c6;--vn:#082e4a;--vt:#0aa8a3;--vl:#dbe7ef;--vm:#6c8190;--vs:#f5f9fc}
+.vtop{background:#071f33;color:#d7e8f3;text-align:center;font-size:12px;padding:8px 16px}
+.vnav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--vl);box-shadow:0 6px 22px rgba(10,52,80,.05)}
+.vnavin{width:min(1180px,calc(100% - 36px));margin:auto;min-height:80px;display:flex;align-items:center;gap:18px}
+.vbrand{display:flex;align-items:center;gap:10px;min-width:230px}.vbrand img{width:86px;height:58px;object-fit:contain;filter:brightness(0) saturate(100%) invert(29%) sepia(75%) saturate(1234%) hue-rotate(169deg) brightness(83%) contrast(101%)}.vbrand strong{display:block;color:var(--vn);font-size:15px}.vbrand small{display:block;color:var(--vm);font-size:10px;font-weight:700;margin-top:3px}
+.vlinks{display:flex;justify-content:center;align-items:center;gap:17px;flex:1;font-size:12.5px;font-weight:800;color:#476277;white-space:nowrap}.vlinks a:hover{color:var(--vb)}
+.vactions{display:flex;gap:8px}.vbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 15px;border-radius:12px;font-weight:900;border:1px solid transparent;text-decoration:none}.vwa{border-color:#22a366;color:#168652;background:#fff}.vquote{background:linear-gradient(135deg,var(--vb),var(--vb2));color:#fff}
+.vmenu{display:none;border:1px solid var(--vl);background:#fff;border-radius:11px;padding:9px 12px}.vmobile{display:none;width:min(1180px,calc(100% - 36px));margin:auto;padding-bottom:12px}.vmobile a{display:block;padding:10px 0;border-top:1px solid var(--vl);font-weight:800;color:#476277}
+.vsec{padding:86px 0}.vsoft{background:var(--vs)}.vwrap{width:min(1180px,calc(100% - 36px));margin:auto}.vhead{text-align:center;max-width:820px;margin:0 auto 42px}.vk{display:inline-flex;padding:7px 12px;border:1px solid #d1e8f4;border-radius:999px;background:#e9f5fb;color:var(--vb);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}.vhead h2,.vgrid h2{color:var(--vn);font-size:clamp(30px,4vw,45px);line-height:1.12;margin:0 0 14px}.vhead p,.vgrid>div>p{color:#4f6d82;font-size:18px}
+.vgrid{display:grid;grid-template-columns:.95fr 1.05fr;gap:38px;align-items:center}.vmedia{position:relative}.vmedia>img{width:100%;height:520px;object-fit:cover;border-radius:26px;box-shadow:0 18px 55px rgba(19,64,95,.12)}.vfloat{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(255,255,255,.94);padding:16px 18px;border-radius:17px;box-shadow:0 12px 30px rgba(0,0,0,.12);font-weight:800;color:var(--vn)}
+.vreasons{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.vcard{background:#fff;border:1px solid var(--vl);border-radius:18px;padding:19px;box-shadow:0 9px 28px rgba(15,59,88,.06)}.vcard i{font-size:21px;color:var(--vt);margin-bottom:10px}.vcard h3{font-size:17px;color:var(--vn);margin:0 0 7px}.vcard p{font-size:12.5px;color:var(--vm);margin:0}
+.vchoice{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.vstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}.vstats div{background:linear-gradient(145deg,#0b3558,#0d5f91);color:#fff;border-radius:16px;padding:17px;text-align:center}.vstats b{display:block;font-size:24px}.vstats span{font-size:11px;color:#cfe2ed}
+.vproof{display:grid;gap:20px}.vcase{background:#fff;border:1px solid var(--vl);border-radius:22px;padding:22px;box-shadow:0 10px 30px rgba(15,59,88,.06)}.vcasehead{display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap;margin-bottom:14px}.vcasehead h3{margin:0 0 6px;color:var(--vn)}.vcasehead p{margin:0;color:var(--vm);font-size:12px}
+.vba{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vba figure{margin:0}.vba img{width:100%;height:340px;object-fit:cover;border-radius:15px}.vba figcaption{text-align:center;font-size:12px;color:var(--vm);margin-top:6px}
+.vexp{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.vexp-card{position:relative;overflow:hidden;border-radius:18px;background:#eaf3f7;min-height:285px}.vexp-card img{width:100%;height:285px;object-fit:cover}.vlabel{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(7,42,68,.88);color:#fff;border-radius:13px;padding:10px 11px;font-size:11px;font-weight:800}.vclinical{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.vclinical img{width:100%;height:180px;object-fit:cover;border-radius:14px}.vnote{font-size:11px;color:var(--vm);margin-top:11px;padding:12px 14px;background:#eef7fb;border:1px solid #d8e9f2;border-radius:12px}
+.vfooter{background:#061e31;color:#bcd1dd;padding:46px 0 28px}.vfootergrid{display:grid;grid-template-columns:1.35fr .8fr 1.15fr 1fr;gap:28px}.vfooterlogo{width:235px;min-height:72px;background:#fff;border-radius:14px;padding:8px 12px;display:flex;align-items:center;gap:10px;margin-bottom:14px}.vfooterlogo img{width:82px;height:54px;object-fit:contain;filter:brightness(0) saturate(100%) invert(29%) sepia(75%) saturate(1234%) hue-rotate(169deg) brightness(83%) contrast(101%)}.vfooterlogo strong{display:block;color:#0b3558;font-size:15px}.vfooterlogo small{display:block;color:#668397;font-size:9px}.vfooter h4{margin:0 0 12px;color:#fff;font-size:13px}.vfooter p,.vfooter a{font-size:12px;color:#a9bfcc}.vflinks{display:grid;gap:7px}.vbottom{margin-top:27px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:10.5px;color:#7893a5;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:960px){.vlinks,.vactions .vwa,.vactions .vquote{display:none}.vmenu{display:block}.vmobile.open{display:block}.vgrid{grid-template-columns:1fr}.vchoice{grid-template-columns:1fr 1fr}.vfootergrid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.vwrap,.vnavin,.vmobile{width:calc(100% - 24px)}.vsec{padding:64px 0}.vbrand{min-width:auto}.vbrand span{display:none}.vbrand img{width:72px}.vreasons,.vchoice,.vstats,.vexp,.vclinical,.vfootergrid,.vba{grid-template-columns:1fr}.vmedia>img{height:390px}}
+`;
+doc.head.appendChild(style);
 
-  const style=doc.createElement('style');
-  style.textContent=`
-  :root{--vd-blue:#075f9c;--vd-blue2:#1684c6;--vd-navy:#082e4a;--vd-teal:#0aa8a3;--vd-gold:#c9a15f;--vd-soft:#f5f9fc;--vd-line:#dbe7ef;--vd-muted:#6c8190}
-  .vd-top{background:#071f33;color:#d7e8f3;text-align:center;font-size:12px;padding:8px 16px}
-  .vd-nav{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--vd-line);box-shadow:0 6px 22px rgba(10,52,80,.05)}
-  .vd-navin{width:min(1180px,calc(100% - 36px));margin:auto;min-height:80px;display:flex;align-items:center;gap:18px}
-  .vd-brand{display:flex;align-items:center;gap:10px;min-width:230px}
-  .vd-brand img{width:86px;height:58px;object-fit:contain;filter:brightness(0) saturate(100%) invert(29%) sepia(75%) saturate(1234%) hue-rotate(169deg) brightness(83%) contrast(101%)}
-  .vd-brand strong{display:block;color:var(--vd-navy);font-size:15px;letter-spacing:.03em}.vd-brand small{display:block;color:var(--vd-muted);font-size:10px;font-weight:700;margin-top:3px}
-  .vd-links{display:flex;justify-content:center;align-items:center;gap:17px;flex:1;font-size:12.5px;font-weight:800;color:#476277;white-space:nowrap}.vd-links a:hover{color:var(--vd-blue)}
-  .vd-actions{display:flex;align-items:center;gap:8px}.vd-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 15px;border-radius:12px;font-weight:900;border:1px solid transparent;text-decoration:none}.vd-wa{border-color:#22a366;color:#168652;background:#fff}.vd-quote{background:linear-gradient(135deg,var(--vd-blue),var(--vd-blue2));color:#fff}
-  .vd-menu{display:none;border:1px solid var(--vd-line);background:#fff;border-radius:11px;padding:9px 12px}.vd-mobile{display:none;width:min(1180px,calc(100% - 36px));margin:auto;padding-bottom:12px}.vd-mobile a{display:block;padding:10px 0;border-top:1px solid var(--vd-line);font-weight:800;color:#476277}
-  .vd-sec{padding:86px 0}.vd-soft{background:var(--vd-soft)}.vd-wrap{width:min(1180px,calc(100% - 36px));margin:auto}.vd-head{text-align:center;max-width:820px;margin:0 auto 42px}.vd-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid #d1e8f4;border-radius:999px;background:#e9f5fb;color:var(--vd-blue);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
-  .vd-head h2,.vd-grid h2{color:var(--vd-navy);font-size:clamp(30px,4vw,45px);line-height:1.12;margin:0 0 14px}.vd-head p,.vd-grid>div>p{color:#4f6d82;font-size:18px}
-  .vd-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:38px;align-items:center}.vd-media{position:relative}.vd-media>img{width:100%;height:520px;object-fit:cover;border-radius:26px;box-shadow:0 18px 55px rgba(19,64,95,.12)}.vd-float{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);padding:16px 18px;border-radius:17px;box-shadow:0 12px 30px rgba(0,0,0,.12);font-weight:800;color:var(--vd-navy)}
-  .vd-reasons{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}.vd-card{background:#fff;border:1px solid var(--vd-line);border-radius:18px;padding:19px;box-shadow:0 9px 28px rgba(15,59,88,.06)}.vd-card i{font-size:21px;color:var(--vd-teal);margin-bottom:10px}.vd-card h3{font-size:17px;color:var(--vd-navy);margin:0 0 7px}.vd-card p{font-size:12.5px;color:var(--vd-muted);margin:0}
-  .vd-choice{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.vd-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}.vd-stats div{background:linear-gradient(145deg,#0b3558,#0d5f91);color:#fff;border-radius:16px;padding:17px;text-align:center}.vd-stats b{display:block;font-size:24px}.vd-stats span{font-size:11px;color:#cfe2ed}
-  .vd-proof{display:grid;gap:20px}.vd-case{background:#fff;border:1px solid var(--vd-line);border-radius:22px;padding:22px;box-shadow:0 10px 30px rgba(15,59,88,.06)}.vd-casehead{display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap;margin-bottom:14px}.vd-casehead h3{margin:0 0 6px;color:var(--vd-navy)}.vd-casehead p{margin:0;color:var(--vd-muted);font-size:12px}
-  .vd-ba{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vd-ba figure{margin:0}.vd-ba img{width:100%;height:340px;object-fit:cover;border-radius:15px}.vd-ba figcaption{text-align:center;font-size:12px;color:var(--vd-muted);margin-top:6px}
-  .vd-intl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.vd-intl-card{position:relative;overflow:hidden;border-radius:18px;background:#eaf3f7;min-height:280px}.vd-intl-card img{width:100%;height:100%;min-height:280px;object-fit:cover}.vd-label{position:absolute;left:10px;bottom:10px;background:rgba(7,42,68,.84);color:#fff;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:800}
-  .vd-clinical{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.vd-clinical img{width:100%;height:180px;object-fit:cover;border-radius:14px}.vd-note{font-size:11px;color:var(--vd-muted);margin-top:11px}
-  .vd-footer{background:#061e31;color:#bcd1dd;padding:46px 0 28px}.vd-footergrid{display:grid;grid-template-columns:1.35fr .8fr 1.15fr 1fr;gap:28px}.vd-footerlogo{width:235px;min-height:72px;background:#fff;border-radius:14px;padding:8px 12px;display:flex;align-items:center;gap:10px;margin-bottom:14px}.vd-footerlogo img{width:82px;height:54px;object-fit:contain;filter:brightness(0) saturate(100%) invert(29%) sepia(75%) saturate(1234%) hue-rotate(169deg) brightness(83%) contrast(101%)}.vd-footerlogo strong{display:block;color:#0b3558;font-size:15px}.vd-footerlogo small{display:block;color:#668397;font-size:9px}.vd-footer h4{margin:0 0 12px;color:#fff;font-size:13px}.vd-footer p,.vd-footer a{font-size:12px;color:#a9bfcc}.vd-footerlinks{display:grid;gap:7px}.vd-social{display:flex;gap:8px;margin-top:12px}.vd-social a{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#0d3a5c;color:#fff}.vd-bottom{margin-top:27px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:10.5px;color:#7893a5;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-  @media(max-width:960px){.vd-links,.vd-actions .vd-wa,.vd-actions .vd-quote{display:none}.vd-menu{display:block}.vd-mobile.open{display:block}.vd-grid{grid-template-columns:1fr}.vd-choice{grid-template-columns:1fr 1fr}.vd-intl{grid-template-columns:1fr 1fr}.vd-footergrid{grid-template-columns:1fr 1fr}}
-  @media(max-width:640px){.vd-wrap,.vd-navin,.vd-mobile{width:calc(100% - 24px)}.vd-sec{padding:64px 0}.vd-brand{min-width:auto}.vd-brand span{display:none}.vd-brand img{width:72px}.vd-reasons,.vd-choice,.vd-stats,.vd-intl,.vd-clinical,.vd-footergrid,.vd-ba{grid-template-columns:1fr}.vd-media>img{height:390px}.vd-intl-card,.vd-intl-card img{min-height:320px}}
-  `;
-  doc.head.appendChild(style);
+const h=doc.createElement('div');h.innerHTML=`<div class="vtop">International Patient Support • Monday–Sunday 08:00–20:00 • WhatsApp / Hotline +84 987 719 889</div><header class="vnav"><div class="vnavin"><a class="vbrand" href="#home"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/logo-new.png" alt="Viet Duc Dental"><span><strong>VIET DUC DENTAL</strong><small>International Dental Care in Vietnam</small></span></a><nav class="vlinks"><a href="#why-vietnam">Why Vietnam</a><a href="#why-vietduc">Why Viet Duc</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#journey">Process</a><a href="#proof">Customer Experience</a></nav><div class="vactions"><a class="vbtn vwa" href="https://wa.me/84987719889" target="_blank">WhatsApp</a><a class="vbtn vquote" href="#contact">Get Free Quote</a><button class="vmenu" type="button">Menu</button></div></div><div class="vmobile"><a href="#why-vietnam">Why Vietnam</a><a href="#why-vietduc">Why Viet Duc Dental</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#journey">Process</a><a href="#proof">Customer Experience</a><a href="#contact">Contact</a></div></header>`;
+while(h.firstChild)doc.body.insertBefore(h.firstChild,doc.body.firstChild);
 
-  const header=doc.createElement('div');
-  header.innerHTML=`
-  <div class="vd-top">International Patient Support • Monday–Sunday 08:00–20:00 • WhatsApp / Hotline +84 987 719 889</div>
-  <header class="vd-nav">
-    <div class="vd-navin">
-      <a class="vd-brand" href="#home"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/logo-new.png" alt="Viet Duc Dental"><span><strong>VIET DUC DENTAL</strong><small>International Dental Care in Vietnam</small></span></a>
-      <nav class="vd-links"><a href="#why-vietnam">Why Vietnam</a><a href="#why-vietduc">Why Viet Duc</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#journey">Process</a><a href="#proof">Results</a></nav>
-      <div class="vd-actions"><a class="vd-btn vd-wa" href="https://wa.me/84987719889" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><a class="vd-btn vd-quote" href="#contact">Get Free Quote</a><button class="vd-menu" type="button"><i class="fa-solid fa-bars"></i></button></div>
-    </div>
-    <div class="vd-mobile"><a href="#why-vietnam">Why Vietnam</a><a href="#why-vietduc">Why Viet Duc Dental</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#journey">Process</a><a href="#proof">Results</a><a href="#contact">Contact</a></div>
-  </header>`;
-  while(header.firstChild) doc.body.insertBefore(header.firstChild,doc.body.firstChild);
+const hero=doc.querySelector('#home')||doc.querySelector('main section');
+const why=doc.createElement('section');why.id='why-vietnam';why.className='vsec vsoft';why.innerHTML=`<div class="vwrap vgrid"><div class="vmedia"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/11/Nha-khoa.png" alt="Viet Duc Dental"><div class="vfloat">Plan treatment, expected costs and travel timing before flying to Vietnam.</div></div><div><span class="vk">Why Vietnam for Dental Care?</span><h2>Professional Dental Care, Competitive Costs and a Convenient Vietnam Journey</h2><p>Viet Duc Dental's international content highlights modern technology, broad treatment options and competitive treatment planning for overseas visitors.</p><div class="vreasons"><div class="vcard"><h3>Competitive Treatment Costs</h3><p>Compare an estimated treatment plan before deciding whether travel makes sense for you.</p></div><div class="vcard"><h3>Modern 2D / 3D Diagnostics</h3><p>Digital X-ray and 3D imaging support examination and treatment planning.</p></div><div class="vcard"><h3>Wide Treatment Range</h3><p>Implants, full-mouth restoration, crowns, veneers and general dentistry.</p></div><div class="vcard"><h3>Treatment + Travel Planning</h3><p>Appointments can be coordinated around an international patient's Vietnam schedule.</p></div></div></div></div>`;
+hero.insertAdjacentElement('afterend',why);
 
-  const hero=doc.querySelector('#home') || doc.querySelector('main section');
-  const whyVN=doc.createElement('section');
-  whyVN.id='why-vietnam';whyVN.className='vd-sec vd-soft';
-  whyVN.innerHTML=`<div class="vd-wrap vd-grid">
-    <div class="vd-media"><img src="https://images.unsplash.com/photo-1742311115947-e5023fd20eee?auto=format&fit=crop&q=82&w=1500" alt="Ho Chi Minh City"><div class="vd-float">Professional dental care can be planned around your stay in Ho Chi Minh City — combining treatment, transparent cost planning and travel convenience.</div></div>
-    <div><span class="vd-kicker">Why Vietnam?</span><h2>Why International Patients Consider Vietnam for Dental Care</h2><p>Viet Duc Dental's English content positions Vietnam as an option for international visitors seeking modern dental technology, broad treatment availability and more competitive pricing than many Western markets.</p>
-      <div class="vd-reasons">
-        <div class="vd-card"><i class="fa-solid fa-wallet"></i><h3>Competitive Treatment Costs</h3><p>Transparent estimates can help patients compare treatment options before travelling.</p></div>
-        <div class="vd-card"><i class="fa-solid fa-x-ray"></i><h3>Modern 2D / 3D Diagnostics</h3><p>Digital X-ray and 3D imaging support examination and treatment planning.</p></div>
-        <div class="vd-card"><i class="fa-solid fa-tooth"></i><h3>Wide Treatment Range</h3><p>Implants, full-mouth restoration, crowns, veneers and general dental care in one system.</p></div>
-        <div class="vd-card"><i class="fa-solid fa-plane"></i><h3>Treatment + Travel</h3><p>Appointments can be coordinated around the patient's Vietnam travel schedule.</p></div>
-      </div>
-    </div>
-  </div>`;
-  hero.insertAdjacentElement('afterend',whyVN);
+const about=doc.querySelector('#about');
+const choose=doc.createElement('section');choose.id='why-vietduc';choose.className='vsec';choose.innerHTML=`<div class="vwrap"><div class="vhead"><span class="vk">Why Viet Duc Dental?</span><h2>Expertise, Technology and Clear International Patient Support</h2><p>Viet Duc Dental's English website highlights experienced professionals, modern diagnostic equipment, genuine materials, sterilization procedures, transparent planning and English-speaking support.</p></div><div class="vchoice"><div class="vcard"><h3>Experienced Dental Professionals</h3><p>Treatment plans are built around the patient's actual clinical condition.</p></div><div class="vcard"><h3>3D Imaging & Digital Planning</h3><p>Cone Beam CT, digital scanning and CAD/CAM support advanced treatment planning.</p></div><div class="vcard"><h3>Sterilization & Infection Control</h3><p>Clinical processes emphasize instrument cleaning and sterilization.</p></div><div class="vcard"><h3>Genuine Dental Materials</h3><p>The clinic states that genuine and certified materials are used.</p></div><div class="vcard"><h3>Transparent Treatment Information</h3><p>Patients receive clearer information on options and expected costs.</p></div><div class="vcard"><h3>English-Speaking Support</h3><p>International patient support assists with appointments and communication.</p></div></div><div class="vstats"><div><b>5+</b><span>Clinic locations</span></div><div><b>10+</b><span>Years of experience</span></div><div><b>10,000+</b><span>Clients served</span></div><div><b>7 days</b><span>Open every week</span></div></div></div>`;
+(about||why).insertAdjacentElement('afterend',choose);
 
-  const about=doc.querySelector('#about');
-  const whyVD=doc.createElement('section');
-  whyVD.id='why-vietduc';whyVD.className='vd-sec';
-  whyVD.innerHTML=`<div class="vd-wrap"><div class="vd-head"><span class="vd-kicker">Why Viet Duc Dental?</span><h2>Built for Clear, Technology-Supported International Patient Care</h2><p>Viet Duc Dental highlights experienced professionals, modern diagnostics, genuine materials, infection-control procedures, transparent treatment information and English-speaking support.</p></div>
-    <div class="vd-choice">
-      <div class="vd-card"><i class="fa-solid fa-user-doctor"></i><h3>Experienced Dental Professionals</h3><p>Treatment plans are based on clinical examination and the patient's actual dental condition.</p></div>
-      <div class="vd-card"><i class="fa-solid fa-cube"></i><h3>Modern Imaging & Planning</h3><p>2D/3D imaging and digital diagnostic technology support treatment decisions.</p></div>
-      <div class="vd-card"><i class="fa-solid fa-shield-virus"></i><h3>Sterilization & Infection Control</h3><p>Instrument cleaning, sterilization and hygienic clinical procedures are emphasized.</p></div>
-      <div class="vd-card"><i class="fa-solid fa-certificate"></i><h3>Genuine Dental Materials</h3><p>The clinic states that certified, genuine dental materials are used.</p></div>
-      <div class="vd-card"><i class="fa-solid fa-file-invoice-dollar"></i><h3>Transparent Treatment Planning</h3><p>Patients receive clearer information about condition, options and expected cost before additional procedures.</p></div>
-      <div class="vd-card"><i class="fa-solid fa-language"></i><h3>English-Speaking Support</h3><p>International patient support assists with appointments, treatment information and communication.</p></div>
-    </div>
-    <div class="vd-stats"><div><b>5+</b><span>Clinic locations</span></div><div><b>10+</b><span>Years of experience</span></div><div><b>10,000+</b><span>Clients served</span></div><div><b>7 days</b><span>Open every week</span></div></div>
-  </div>`;
-  (about||whyVN).insertAdjacentElement('afterend',whyVD);
+[...doc.querySelectorAll('section')].forEach(s=>{const t=(s.textContent||'').toLowerCase();if(s.id!=='proof'&&(t.includes('real patient transformations')||t.includes('before & after showcase')||t.includes('clinical proof')||t.includes('customer experience')))s.remove()});
 
-  [...doc.querySelectorAll('section')].forEach(sec=>{
-    const t=(sec.textContent||'').toLowerCase();
-    if(sec.id!=='proof' && (t.includes('real patient transformations')||t.includes('before & after showcase')||t.includes('clinical proof'))) sec.remove();
-  });
+const proof=doc.createElement('section');proof.id='proof';proof.className='vsec vsoft';proof.innerHTML=`<div class="vwrap"><div class="vhead"><span class="vk">Customer Experience</span><h2>Real Treatment Results & Customer Experience at Viet Duc Dental</h2><p>Only images hosted on Viet Duc Dental's own website are used in this section.</p></div><div class="vproof"><div class="vcase"><div class="vcasehead"><div><h3>Before & After — Full-Mouth Dental Restoration</h3><p>Clinical before-and-after imagery from Viet Duc Dental's Customer Experience content.</p></div><a class="vbtn vquote" href="#contact">Request Treatment Review</a></div><div class="vba"><figure><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/1.jpeg" alt="Before dental restoration"><figcaption>Before</figcaption></figure><figure><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/2.jpeg" alt="After dental restoration"><figcaption>After</figcaption></figure></div></div><div class="vcase"><div class="vcasehead"><div><h3>Customer Experience — Treatment & Clinic Journey</h3><p>Website-hosted imagery only; no stock customer portraits are added.</p></div></div><div class="vexp"><div class="vexp-card"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/09/implant.webp" alt="Implant treatment at Viet Duc Dental"><div class="vlabel">International-Standard Implant Care</div></div><div class="vexp-card"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/11/Nha-khoa.png" alt="Viet Duc Dental patient experience"><div class="vlabel">In-Clinic Patient Experience</div></div><div class="vexp-card"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/11/Viet-duc.png" alt="Viet Duc Dental facility"><div class="vlabel">Modern Dental Facility</div></div></div><div class="vnote">No external customer photography is used here. When Viet Duc Dental has a clearly verified set of consented Western / international patient portraits on the public website, those can replace these clinic and clinical visuals.</div></div><div class="vcase"><div class="vcasehead"><div><h3>Implant Planning & Clinical Case Images</h3><p>Additional treatment imagery from Viet Duc Dental's implant content library.</p></div></div><div class="vclinical"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-3.jpg" alt="Implant clinical image"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-6.jpg" alt="Implant treatment"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-4.jpg" alt="Implant planning"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-1-scaled.jpg" alt="Implant case"></div></div></div></div>`;
+const contact=doc.querySelector('#contact');(contact||doc.body.lastElementChild).insertAdjacentElement('beforebegin',proof);
 
-  const proof=doc.createElement('section');proof.id='proof';proof.className='vd-sec vd-soft';
-  proof.innerHTML=`<div class="vd-wrap"><div class="vd-head"><span class="vd-kicker">International Patients & Clinical Proof</span><h2>International Patient Visuals + Real Clinical Treatment Imagery</h2><p>For this preview, Western patient visuals are used to match the intended Australia / international audience. Clinical treatment images remain sourced from Viet Duc Dental content.</p></div>
-    <div class="vd-proof">
-      <div class="vd-case"><div class="vd-casehead"><div><h3>Clinical Before & After — Full-Mouth Restoration</h3><p>Close-up treatment results keep the focus on the dental change rather than patient identity.</p></div><a class="vd-btn vd-quote" href="#contact">Request Treatment Review</a></div><div class="vd-ba"><figure><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/1.jpeg" alt="Before full-mouth restoration"><figcaption>Before</figcaption></figure><figure><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/2.jpeg" alt="After full-mouth restoration"><figcaption>After</figcaption></figure></div></div>
-      <div class="vd-case"><div class="vd-casehead"><div><h3>International Patient Experience</h3><p>Western-audience visuals selected for the international landing page.</p></div></div>
-        <div class="vd-intl">
-          <div class="vd-intl-card"><img src="https://images.unsplash.com/photo-1750853736853-7eed0c15d4a0?auto=format&fit=crop&q=82&w=1000" alt="Senior international dental patient audience"><span class="vd-label">Senior Implant Audience</span></div>
-          <div class="vd-intl-card"><img src="https://images.unsplash.com/photo-1758686254563-5c5ab338c8b9?auto=format&fit=crop&q=82&w=1000" alt="Mature international patient audience"><span class="vd-label">Full-Mouth Audience</span></div>
-          <div class="vd-intl-card"><img src="https://images.unsplash.com/photo-1758691737587-7630b4d31d16?auto=format&fit=crop&q=82&w=1000" alt="International cosmetic dentistry audience"><span class="vd-label">Cosmetic Dentistry Audience</span></div>
-          <div class="vd-intl-card"><img src="https://images.unsplash.com/photo-1777331903190-341a3dd0441b?auto=format&fit=crop&q=82&w=1000" alt="International patient dental consultation"><span class="vd-label">Dental Consultation</span></div>
-        </div>
-        <p class="vd-note">Preview note: the four lifestyle photos above are representative international-patient visuals and are not presented as Viet Duc Dental treatment cases. Replace them with consented real international patient photography once available.</p>
-      </div>
-      <div class="vd-case"><div class="vd-casehead"><div><h3>Implant Planning & Clinical Images</h3><p>Treatment imagery from Viet Duc Dental's implant content.</p></div></div><div class="vd-clinical"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-3.jpg" alt="Implant clinical image"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-6.jpg" alt="Implant treatment"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-4.jpg" alt="Implant planning"><img src="https://nhakhoavietduc.com/wp-content/uploads/2026/04/Trong-rang-implant-go-vap-top-dia-chi-uy-tin-hang-dau-1-scaled.jpg" alt="Implant case"></div></div>
-    </div>
-  </div>`;
-  const contact=doc.querySelector('#contact');(contact||doc.body.lastElementChild).insertAdjacentElement('beforebegin',proof);
+const f=doc.createElement('footer');f.className='vfooter';f.innerHTML=`<div class="vwrap"><div class="vfootergrid"><div><div class="vfooterlogo"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/logo-new.png" alt="Viet Duc Dental"><span><strong>VIET DUC DENTAL</strong><small>International Dental Care</small></span></div><p>Dental treatment planning, restorative dentistry and international patient coordination in Ho Chi Minh City.</p></div><div><h4>Services</h4><div class="vflinks"><a href="#services">Dental Implants</a><a href="#services">All-on-4 / All-on-6</a><a href="#services">Veneers & Crowns</a><a href="#services">Full-Mouth Restoration</a></div></div><div><h4>Clinic & Contact</h4><p>BT 50, Street No. 3, Cityland Park Hills, Go Vap Ward, HCMC</p><p>WhatsApp / Hotline: +84 987 719 889</p><p>Monday–Sunday: 08:00–20:00</p></div><div><h4>International Patients</h4><div class="vflinks"><a href="#why-vietnam">Why Vietnam</a><a href="#why-vietduc">Why Viet Duc</a><a href="#journey">Treatment Journey</a><a href="#pricing">International Pricing</a><a href="#contact">Get Free Treatment Plan</a></div></div></div><div class="vbottom"><span>© 2026 Viet Duc Dental. All rights reserved.</span><span>Exact treatment, pricing and benefit terms are confirmed after clinical evaluation.</span></div></div>`;doc.body.appendChild(f);
 
-  const footer=doc.createElement('footer');footer.className='vd-footer';
-  footer.innerHTML=`<div class="vd-wrap"><div class="vd-footergrid"><div><div class="vd-footerlogo"><img src="https://nhakhoavietduc.com/wp-content/uploads/2025/10/logo-new.png" alt="Viet Duc Dental"><span><strong>VIET DUC DENTAL</strong><small>International Dental Care</small></span></div><p>Dental treatment planning, restorative dentistry and international patient coordination in Ho Chi Minh City.</p><div class="vd-social"><a href="https://www.facebook.com/VietDucDentalClinic" target="_blank"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.instagram.com/vietducdentalclinic/" target="_blank"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/84987719889" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></div></div><div><h4>Services</h4><div class="vd-footerlinks"><a href="#services">Dental Implants</a><a href="#services">All-on-4 / All-on-6</a><a href="#services">Veneers & Crowns</a><a href="#services">Full-Mouth Restoration</a></div></div><div><h4>Clinic & Contact</h4><p><strong style="color:#fff">Go Vap, HCMC</strong><br>BT 50, Street No. 3, Cityland Park Hills, Go Vap Ward</p><p>Hotline / WhatsApp:<br><strong style="color:#fff">+84 987 719 889</strong></p><p>Monday–Sunday: 08:00–20:00</p></div><div><h4>International Patients</h4><div class="vd-footerlinks"><a href="#why-vietnam">Why Vietnam</a><a href="#why-vietduc">Why Viet Duc Dental</a><a href="#journey">Treatment Journey</a><a href="#pricing">International Pricing</a><a href="#contact">Get Free Treatment Plan</a></div></div></div><div class="vd-bottom"><span>© 2026 Viet Duc Dental. All rights reserved.</span><span>Exact treatment, pricing, travel benefits and warranty terms are confirmed after clinical evaluation.</span></div></div>`;
-  doc.body.appendChild(footer);
+const sc=doc.createElement('script');sc.textContent=`document.querySelector('.vmenu')?.addEventListener('click',()=>document.querySelector('.vmobile')?.classList.toggle('open'));document.querySelectorAll('.vmobile a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.vmobile')?.classList.remove('open')));`;doc.body.appendChild(sc);
 
-  const script=doc.createElement('script');
-  script.textContent=`document.querySelector('.vd-menu')?.addEventListener('click',()=>document.querySelector('.vd-mobile')?.classList.toggle('open'));document.querySelectorAll('.vd-mobile a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.vd-mobile')?.classList.remove('open')));`;
-  doc.body.appendChild(script);
-
-  document.open();
-  document.write('<!doctype html>'+doc.documentElement.outerHTML);
-  document.close();
-})().catch(err=>{
-  document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;padding:30px;font-family:Arial;color:#0b3558;text-align:center"><div><h2>Preview is refreshing</h2><p>Please reload this page in a few seconds.</p><small>'+err.message+'</small></div></div>';
-});
-</script>
-</body>
-</html>
+document.open();document.write('<!doctype html>'+doc.documentElement.outerHTML);document.close();
+})().catch(err=>{document.body.innerHTML='<div style="min-height:100vh;display:grid;place-items:center;padding:30px;font-family:Arial;color:#0b3558;text-align:center"><div><h2>Preview is refreshing</h2><p>Please reload in a few seconds.</p></div></div>'});
+</script></body></html>
