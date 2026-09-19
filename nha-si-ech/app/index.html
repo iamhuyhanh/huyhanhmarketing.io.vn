@@ -19,28 +19,55 @@
   <div class="dashboard">
     <aside class="panel">
       <h3>Connected account</h3>
-      <div class="account"><span class="dot"></span><div><b>TikTok</b><div class="small">Not connected</div></div></div>
+      <div class="account">
+        <img data-account-avatar hidden alt="TikTok creator avatar" style="width:44px;height:44px;border-radius:50%;object-fit:cover">
+        <span class="dot" data-account-dot></span>
+        <div><b data-account-name>TikTok</b><div class="small" data-account-meta>Not connected</div></div>
+      </div>
       <a class="btn" style="width:100%;margin-top:14px" data-connect-tiktok href="#">Connect TikTok</a>
       <p class="small">TikTok authorization is completed through Login Kit. The connected user grants the requested scopes.</p>
       <hr>
       <b>Publishing safeguards</b>
-      <p class="small">Creator info and available privacy options are checked before each post request.</p>
+      <p class="small">Creator Info is queried before publishing so the page shows the privacy options available to the connected creator.</p>
     </aside>
 
     <section class="panel" style="padding:24px">
       <h3>Post review</h3>
       <div class="status" data-status>Connect TikTok before publishing.</div>
-      <div class="field"><label>Video</label><input value="Dental education short — preview.mp4" readonly></div>
-      <div class="field"><label>Caption</label><textarea>Niềng răng xong, vì sao răng vẫn có thể chạy lại? 🦷
 
-#nhakhoa #chamsocrangmieng #dentaltips</textarea></div>
-      <div class="row">
-        <div class="field"><label>Privacy</label><select><option>SELF_ONLY</option><option disabled>Loaded from TikTok Creator Info after connection</option></select></div>
-        <div class="field"><label>Account</label><input value="Connect TikTok to load creator account" readonly></div>
+      <div class="field">
+        <label>Video</label>
+        <input value="Nha Si Ech Dental — 4 second review demo.mp4" readonly>
+        <p class="small">The demo workflow contains a short MP4 clip used only to demonstrate the TikTok Direct Post flow.</p>
       </div>
-      <div class="check"><input type="checkbox" data-consent id="consent"><label for="consent" style="font-weight:600">I confirm that I reviewed this video, caption and publishing settings and want to send this post to TikTok.</label></div>
+
+      <div class="field">
+        <label>Caption</label>
+        <textarea data-caption>Niềng răng xong, vì sao răng vẫn có thể chạy lại? 🦷
+
+#nhakhoa #chamsocrangmieng #dentaltips</textarea>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Privacy</label>
+          <select data-privacy><option value="">Connect TikTok to load options</option></select>
+          <p class="small">For an unaudited client, use SELF_ONLY/private when available.</p>
+        </div>
+        <div class="field">
+          <label>Account</label>
+          <input data-account-input value="Connect TikTok to load creator account" readonly>
+        </div>
+      </div>
+
+      <div class="check">
+        <input type="checkbox" data-consent id="consent">
+        <label for="consent" style="font-weight:600">I confirm that I reviewed this video, caption and publishing settings and want to send this post to TikTok.</label>
+      </div>
+
       <button class="btn" data-publish disabled>Publish to TikTok</button>
-      <p class="small">This interface is prepared for the TikTok Content Posting API. Connect the OAuth/publishing workflow before submitting the app for review.</p>
+      <p class="small" data-publish-id></p>
+      <p class="small">AI-generated dental animation is sent with the TikTok AI-generated content flag enabled.</p>
     </section>
   </div>
 </div></main>
