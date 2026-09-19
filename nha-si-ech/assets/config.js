@@ -1,5 +1,6 @@
 window.NHA_SI_ECH_CONFIG = {
-  // Sau khi tạo OAuth workflow n8n, thay URL này bằng webhook thật.
-  // Ví dụ: https://n8n.huyhanhmarketing.io.vn/webhook/tiktok/oauth/start
-  tiktokOAuthStartUrl: "REPLACE_WITH_N8N_TIKTOK_OAUTH_START_URL"
+  tiktokOAuthStartUrl: "https://n8n.huyhanhmarketing.io.vn/webhook/tiktok-oauth-start",
+  tiktokStatusUrl: "https://n8n.huyhanhmarketing.io.vn/webhook/tiktok-demo-status",
+  tiktokPublishUrl: "https://n8n.huyhanhmarketing.io.vn/webhook/tiktok-demo-publish",
+  tiktokPublishStatusUrl: "https://n8n.huyhanhmarketing.io.vn/webhook/tiktok-demo-publish-status"
 };
