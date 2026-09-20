@@ -38,7 +38,7 @@
       <div class="field">
         <label>Video</label>
         <input value="Nha Si Ech Dental — 4 second review demo.mp4" readonly>
-        <p class="small">The demo workflow contains a short MP4 clip used only to demonstrate the TikTok Direct Post flow.</p>
+        <p class="small">The demo workflow contains a short MP4 clip used to demonstrate both TikTok Direct Post and Upload as Draft flows.</p>
       </div>
 
       <div class="field">
@@ -68,6 +68,18 @@
       <button class="btn" data-publish disabled>Publish to TikTok</button>
       <p class="small" data-publish-id></p>
       <p class="small">AI-generated dental animation is sent with the TikTok AI-generated content flag enabled.</p>
+
+      <hr>
+      <h3 style="font-size:20px">Upload as Draft</h3>
+      <div class="notice">
+        This option uses TikTok's <b>video.upload</b> permission. It uploads the video to the creator's TikTok inbox as a draft. It does <b>not</b> publish automatically. The creator must open the TikTok inbox notification to continue editing and complete the post inside TikTok.
+      </div>
+      <div class="check">
+        <input type="checkbox" data-draft-consent id="draft-consent">
+        <label for="draft-consent" style="font-weight:600">I understand this sends the video to my TikTok inbox as a draft and I will finish editing/posting inside TikTok.</label>
+      </div>
+      <button class="btn secondary" data-upload-draft disabled>Upload as Draft to TikTok</button>
+      <p class="small" data-draft-id></p>
     </section>
   </div>
 </div></main>
