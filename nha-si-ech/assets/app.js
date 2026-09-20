@@ -12,6 +12,9 @@
   const privacy = document.querySelector('[data-privacy]');
   const caption = document.querySelector('[data-caption]');
   const publishIdEl = document.querySelector('[data-publish-id]');
+  const uploadDraft = document.querySelector('[data-upload-draft]');
+  const draftConsent = document.querySelector('[data-draft-consent]');
+  const draftIdEl = document.querySelector('[data-draft-id]');
 
   let connected = false;
   let session = "";
@@ -33,9 +36,13 @@
     status.style.color = kind === 'error' ? '#9a2d21' : '#0d7771';
   }
 
-  function syncPublishButton() {
-    if (!publish || !consent) return;
-    publish.disabled = !(connected && consent.checked && privacy && privacy.value);
+  function syncActionButtons() {
+    if (publish && consent) {
+      publish.disabled = !(connected && consent.checked && privacy && privacy.value);
+    }
+    if (uploadDraft && draftConsent) {
+      uploadDraft.disabled = !(connected && draftConsent.checked);
+    }
   }
 
   if (connect) {
@@ -93,18 +100,21 @@
       }
 
       setStatus('TikTok connected. Review the video, caption and privacy before publishing.', 'ok');
-      syncPublishButton();
+      syncActionButtons();
     } catch (err) {
       connected = false;
       localStorage.removeItem('nse_tiktok_session');
       session = '';
       setStatus('TikTok connection failed: ' + err.message, 'error');
-      syncPublishButton();
+      syncActionButtons();
     }
   }
 
-  async function pollPublish(publishId) {
+  async function pollPublish(publishId, mode) {
     if (!cfg.tiktokPublishStatusUrl) return;
+
+    const isDraft = mode === 'draft';
+    const idEl = isDraft ? draftIdEl : publishIdEl;
 
     for (let i = 0; i < 15; i++) {
       await new Promise(resolve => setTimeout(resolve, 4000));
@@ -118,27 +128,36 @@
       const data = await res.json();
 
       if (!res.ok || !data.ok) {
-        setStatus('Could not check publish status.', 'error');
+        setStatus('Could not check TikTok status.', 'error');
         return;
       }
 
       const s = String(data.status || 'PROCESSING');
-      if (publishIdEl) publishIdEl.textContent = 'Publish ID: ' + publishId + ' • ' + s;
+      if (idEl) idEl.textContent = 'Publish ID: ' + publishId + ' • ' + s;
+
+      if (isDraft && s === 'SEND_TO_USER_INBOX') {
+        setStatus('Draft delivered to the TikTok inbox. Open TikTok to continue editing and complete the post.', 'ok');
+        return;
+      }
 
       if (s === 'PUBLISH_COMPLETE') {
-        setStatus('TikTok publish completed successfully.', 'ok');
+        setStatus(isDraft
+          ? 'TikTok draft flow completed and the creator posted the media.'
+          : 'TikTok publish completed successfully.', 'ok');
         return;
       }
 
       if (s === 'FAILED') {
-        setStatus('TikTok publish failed: ' + (data.fail_reason || 'Unknown reason'), 'error');
+        setStatus('TikTok ' + (isDraft ? 'draft upload' : 'publish') + ' failed: ' + (data.fail_reason || 'Unknown reason'), 'error');
         return;
       }
 
-      setStatus('TikTok is processing the video: ' + s, 'warn');
+      setStatus('TikTok is processing the ' + (isDraft ? 'draft upload' : 'video') + ': ' + s, 'warn');
     }
 
-    setStatus('Video was uploaded. TikTok is still processing it; check again shortly.', 'warn');
+    setStatus(isDraft
+      ? 'Draft uploaded. TikTok is still processing the inbox delivery; check again shortly.'
+      : 'Video was uploaded. TikTok is still processing it; check again shortly.', 'warn');
   }
 
   if (consent) {
@@ -174,11 +193,47 @@
 
         if (publishIdEl) publishIdEl.textContent = 'Publish ID: ' + data.publish_id;
         setStatus('Video uploaded to TikTok. Waiting for processing...', 'warn');
-        await pollPublish(data.publish_id);
+        await pollPublish(data.publish_id, 'direct');
       } catch (err) {
         setStatus('Publish failed: ' + err.message, 'error');
       } finally {
-        syncPublishButton();
+        syncActionButtons();
+      }
+    });
+  }
+
+
+  if (uploadDraft) {
+    uploadDraft.addEventListener('click', async function(){
+      if (!connected || !draftConsent || !draftConsent.checked || !session) return;
+
+      uploadDraft.disabled = true;
+      setStatus('Uploading the demo video to TikTok as a draft...', 'warn');
+      if (draftIdEl) draftIdEl.textContent = '';
+
+      try {
+        const form = new URLSearchParams();
+        form.set('session', session);
+        form.set('consent', 'true');
+
+        const res = await fetch(cfg.tiktokDraftUploadUrl, {
+          method: 'POST',
+          headers: {'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+          body: form.toString()
+        });
+
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          throw new Error(data.message || data.error || 'Draft upload request failed.');
+        }
+
+        if (draftIdEl) draftIdEl.textContent = 'Publish ID: ' + data.publish_id;
+        setStatus('Draft video uploaded to TikTok. Waiting for inbox delivery...', 'warn');
+        await pollPublish(data.publish_id, 'draft');
+      } catch (err) {
+        setStatus('Draft upload failed: ' + err.message, 'error');
+      } finally {
+        syncActionButtons();
       }
     });
   }
