@@ -161,10 +161,10 @@
   }
 
   if (consent) {
-    consent.addEventListener('change', syncPublishButton);
+    consent.addEventListener('change', syncActionButtons);
   }
   if (privacy) {
-    privacy.addEventListener('change', syncPublishButton);
+    privacy.addEventListener('change', syncActionButtons);
   }
 
   if (publish) {
