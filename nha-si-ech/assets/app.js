@@ -166,6 +166,9 @@
   if (privacy) {
     privacy.addEventListener('change', syncActionButtons);
   }
+  if (draftConsent) {
+    draftConsent.addEventListener('change', syncActionButtons);
+  }
 
   if (publish) {
     publish.addEventListener('click', async function(){
