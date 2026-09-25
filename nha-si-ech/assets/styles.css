@@ -12,7 +12,7 @@ a:hover{text-decoration:underline}
 header{position:sticky;top:0;z-index:20;background:rgba(246,251,251,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(219,233,232,.9)}
 .nav{display:flex;align-items:center;justify-content:space-between;min-height:72px;gap:18px}
 .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--ink)}
-.mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#bff6d0,#4ac788);font-size:27px;box-shadow:var(--shadow)}
+.mark{width:42px;height:42px;border-radius:14px;display:block;object-fit:cover;background:#fff;box-shadow:var(--shadow)}
 .navlinks{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:11px 16px;font-weight:750;cursor:pointer;background:var(--brand);color:#fff;box-shadow:0 9px 24px rgba(13,119,113,.18)}
 .btn:hover{background:#08645f;text-decoration:none}
