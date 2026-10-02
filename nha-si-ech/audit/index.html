@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Post to TikTok Review — Nha Si Ech Dental</title>
+<link rel="icon" type="image/svg+xml" href="/nha-si-ech/assets/app-icon.svg?v=2">
+<link rel="stylesheet" href="/nha-si-ech/assets/styles.css">
+<style>
+.audit-grid{display:grid;grid-template-columns:300px 1fr;gap:20px}
+.preview-card{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;border:1px solid var(--line);border-radius:18px;padding:16px;background:#fbfefe}
+.preview-frame{aspect-ratio:9/16;border-radius:18px;background:linear-gradient(180deg,#d9f7ef,#effcf8);display:grid;place-items:center;overflow:hidden;border:1px solid var(--line)}
+.preview-frame img{width:76%;height:auto}
+.pill{display:inline-flex;padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--brand);font-size:12px;font-weight:800}
+.option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.option{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff}
+.option input{width:auto;margin-right:8px}
+.audit-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.result{font-size:13px;color:var(--muted);word-break:break-word}
+@media(max-width:850px){.audit-grid,.preview-card,.option-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="/nha-si-ech/"><img class="mark" src="/nha-si-ech/assets/app-icon.svg?v=2" alt="Nha Si Ech Dental app icon"><span>Nha Si Ech Dental</span></a>
+  <nav class="navlinks"><a href="/nha-si-ech/">Website</a><a href="/nha-si-ech/terms/">Terms</a><a href="/nha-si-ech/privacy/">Privacy</a></nav>
+</div></header>
+
+<main class="app-shell"><div class="container">
+  <span class="eyebrow">TikTok Content Posting API audit flow</span>
+  <h1 style="font-size:46px">Review and Post to TikTok</h1>
+  <p class="lead">Review the video, caption, privacy and interaction settings before explicitly confirming this post.</p>
+
+  <div class="audit-grid">
+    <aside class="panel">
+      <h3>1. Authorized account</h3>
+      <div class="account">
+        <img data-account-avatar hidden alt="TikTok creator avatar" style="width:44px;height:44px;border-radius:50%;object-fit:cover">
+        <span class="dot" data-account-dot></span>
+        <div><b data-account-name>TikTok</b><div class="small" data-account-meta>Not connected</div></div>
+      </div>
+      <a class="btn" style="width:100%;margin-top:14px" data-connect-tiktok href="#">Connect TikTok</a>
+      <p class="small">TikTok Login Kit is used to authorize the account and requested publishing scopes.</p>
+    </aside>
+
+    <section class="panel" style="padding:24px">
+      <h3>2. Review post</h3>
+      <div class="status" data-status>Checking TikTok connection...</div>
+
+      <div class="field">
+        <label>Video</label>
+        <div class="preview-card">
+          <div class="preview-frame"><img src="/nha-si-ech/assets/app-icon.svg?v=2" alt="Nha Si Ech Dental video preview"></div>
+          <div>
+            <span class="pill">Approved dental education video</span>
+            <h3 style="margin-top:10px">NK-20260911-001_final.mp4</h3>
+            <div class="small">Vertical 9:16 • approximately 56 seconds • AI-generated dental animation</div>
+            <p class="small">This sample video is stored privately by Nha Si Ech Dental and is only submitted after the user confirms the settings below.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="caption">Caption</label>
+        <textarea id="caption" data-caption>Niềng răng xong, vì sao răng vẫn có thể chạy lại? 🦷
+
+#nhakhoa #chamsocrangmieng #dentaltips</textarea>
+        <div class="small">You may edit the caption before posting.</div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="privacy">Privacy</label>
+          <select id="privacy" data-privacy disabled><option value="">Connect TikTok to load options</option></select>
+        </div>
+        <div class="field">
+          <label>Account</label>
+          <input data-account-input value="Not connected" readonly>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Interaction settings</label>
+        <div class="option-grid">
+          <label class="option"><input type="checkbox" data-allow-comment checked>Allow comments</label>
+          <label class="option"><input type="checkbox" data-allow-duet checked>Allow Duet</label>
+          <label class="option"><input type="checkbox" data-allow-stitch checked>Allow Stitch</label>
+        </div>
+      </div>
+
+      <div class="notice">
+        <b>AI-generated content disclosure</b><br>
+        This dental animation contains AI-generated visual content. The TikTok API request is sent with the AI-generated content flag enabled.
+      </div>
+
+      <div class="check">
+        <input id="audit-consent" type="checkbox" data-consent>
+        <label for="audit-consent">I reviewed this video, caption, privacy and interaction settings and explicitly confirm that I want to post this content to TikTok.</label>
+      </div>
+
+      <div class="audit-actions">
+        <button class="btn" data-publish disabled>Post to TikTok</button>
+        <span class="result" data-result></span>
+      </div>
+    </section>
+  </div>
+</div></main>
+
+<footer><div class="container footer">
+  <div>Nha Si Ech Dental</div>
+  <div><a href="/nha-si-ech/terms/">Terms</a> · <a href="/nha-si-ech/privacy/">Privacy</a></div>
+</div></footer>
+
+<script src="/nha-si-ech/assets/config.js"></script>
+<script src="/nha-si-ech/assets/audit.js"></script>
+</body></html>
